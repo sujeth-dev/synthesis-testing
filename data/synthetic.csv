@@ -1,0 +1,501 @@
+user_id,skill_id,correct,timestamp
+student_000,Linear Equations,1,2024-01-01T00:00:00
+student_000,Geometry Fundamentals,1,2024-01-01T00:06:00
+student_000,Linear Equations,0,2024-01-01T00:19:00
+student_000,Linear Equations,1,2024-01-01T00:29:00
+student_000,Algebra Basics,1,2024-01-01T00:31:00
+student_000,Number Theory,1,2024-01-01T00:36:00
+student_000,Geometry Fundamentals,0,2024-01-01T00:46:00
+student_000,Number Theory,1,2024-01-01T00:59:00
+student_000,Combinatorics,1,2024-01-01T01:08:00
+student_000,Algebra Basics,0,2024-01-01T01:23:00
+student_001,Statistics,1,2024-01-01T10:00:00
+student_001,Geometry Fundamentals,0,2024-01-01T10:04:00
+student_001,Linear Equations,1,2024-01-01T10:11:00
+student_001,Calculus Intro,0,2024-01-01T10:14:00
+student_001,Trigonometry,0,2024-01-01T10:25:00
+student_001,Probability,1,2024-01-01T10:38:00
+student_001,Linear Equations,0,2024-01-01T10:46:00
+student_001,Combinatorics,0,2024-01-01T11:01:00
+student_001,Combinatorics,1,2024-01-01T11:08:00
+student_001,Algebra Basics,0,2024-01-01T11:11:00
+student_002,Trigonometry,0,2024-01-01T20:00:00
+student_002,Geometry Fundamentals,0,2024-01-01T20:15:00
+student_002,Trigonometry,1,2024-01-01T20:23:00
+student_002,Calculus Intro,1,2024-01-01T20:38:00
+student_002,Geometry Fundamentals,0,2024-01-01T20:45:00
+student_002,Linear Equations,1,2024-01-01T20:58:00
+student_002,Number Theory,0,2024-01-01T21:02:00
+student_002,Probability,1,2024-01-01T21:06:00
+student_002,Number Theory,1,2024-01-01T21:18:00
+student_002,Algebra Basics,1,2024-01-01T21:25:00
+student_003,Calculus Intro,1,2024-01-02T06:00:00
+student_003,Geometry Fundamentals,0,2024-01-02T06:03:00
+student_003,Calculus Intro,1,2024-01-02T06:14:00
+student_003,Statistics,0,2024-01-02T06:23:00
+student_003,Probability,1,2024-01-02T06:35:00
+student_003,Geometry Fundamentals,0,2024-01-02T06:39:00
+student_003,Trigonometry,0,2024-01-02T06:49:00
+student_003,Combinatorics,1,2024-01-02T06:57:00
+student_003,Quadratic Functions,0,2024-01-02T07:02:00
+student_003,Algebra Basics,0,2024-01-02T07:05:00
+student_004,Quadratic Functions,0,2024-01-02T16:00:00
+student_004,Combinatorics,1,2024-01-02T16:08:00
+student_004,Combinatorics,0,2024-01-02T16:16:00
+student_004,Trigonometry,0,2024-01-02T16:26:00
+student_004,Algebra Basics,1,2024-01-02T16:41:00
+student_004,Number Theory,1,2024-01-02T16:44:00
+student_004,Calculus Intro,1,2024-01-02T16:58:00
+student_004,Quadratic Functions,1,2024-01-02T17:06:00
+student_004,Trigonometry,0,2024-01-02T17:19:00
+student_004,Quadratic Functions,1,2024-01-02T17:33:00
+student_005,Trigonometry,0,2024-01-03T02:00:00
+student_005,Combinatorics,1,2024-01-03T02:10:00
+student_005,Quadratic Functions,0,2024-01-03T02:17:00
+student_005,Number Theory,0,2024-01-03T02:31:00
+student_005,Calculus Intro,0,2024-01-03T02:42:00
+student_005,Calculus Intro,0,2024-01-03T02:45:00
+student_005,Trigonometry,1,2024-01-03T03:00:00
+student_005,Combinatorics,0,2024-01-03T03:05:00
+student_005,Probability,0,2024-01-03T03:08:00
+student_005,Number Theory,0,2024-01-03T03:22:00
+student_006,Probability,0,2024-01-03T12:00:00
+student_006,Trigonometry,1,2024-01-03T12:04:00
+student_006,Statistics,0,2024-01-03T12:15:00
+student_006,Geometry Fundamentals,0,2024-01-03T12:25:00
+student_006,Calculus Intro,1,2024-01-03T12:33:00
+student_006,Probability,1,2024-01-03T12:43:00
+student_006,Linear Equations,1,2024-01-03T12:48:00
+student_006,Number Theory,1,2024-01-03T12:59:00
+student_006,Algebra Basics,1,2024-01-03T13:04:00
+student_006,Algebra Basics,1,2024-01-03T13:16:00
+student_007,Calculus Intro,1,2024-01-03T22:00:00
+student_007,Trigonometry,0,2024-01-03T22:05:00
+student_007,Number Theory,1,2024-01-03T22:10:00
+student_007,Combinatorics,1,2024-01-03T22:21:00
+student_007,Probability,0,2024-01-03T22:35:00
+student_007,Linear Equations,1,2024-01-03T22:40:00
+student_007,Calculus Intro,1,2024-01-03T22:48:00
+student_007,Algebra Basics,0,2024-01-03T22:57:00
+student_007,Linear Equations,1,2024-01-03T23:09:00
+student_007,Calculus Intro,0,2024-01-03T23:22:00
+student_008,Geometry Fundamentals,1,2024-01-04T08:00:00
+student_008,Probability,1,2024-01-04T08:10:00
+student_008,Trigonometry,1,2024-01-04T08:14:00
+student_008,Linear Equations,1,2024-01-04T08:29:00
+student_008,Number Theory,1,2024-01-04T08:44:00
+student_008,Number Theory,0,2024-01-04T08:56:00
+student_008,Geometry Fundamentals,1,2024-01-04T08:59:00
+student_008,Probability,1,2024-01-04T09:08:00
+student_008,Algebra Basics,1,2024-01-04T09:16:00
+student_008,Statistics,1,2024-01-04T09:18:00
+student_009,Probability,1,2024-01-04T18:00:00
+student_009,Number Theory,0,2024-01-04T18:13:00
+student_009,Quadratic Functions,1,2024-01-04T18:22:00
+student_009,Algebra Basics,1,2024-01-04T18:27:00
+student_009,Algebra Basics,0,2024-01-04T18:37:00
+student_009,Algebra Basics,1,2024-01-04T18:39:00
+student_009,Number Theory,1,2024-01-04T18:49:00
+student_009,Linear Equations,0,2024-01-04T18:59:00
+student_009,Combinatorics,1,2024-01-04T19:02:00
+student_009,Geometry Fundamentals,1,2024-01-04T19:17:00
+student_010,Geometry Fundamentals,1,2024-01-05T04:00:00
+student_010,Combinatorics,1,2024-01-05T04:02:00
+student_010,Combinatorics,1,2024-01-05T04:14:00
+student_010,Trigonometry,1,2024-01-05T04:21:00
+student_010,Calculus Intro,1,2024-01-05T04:34:00
+student_010,Quadratic Functions,1,2024-01-05T04:42:00
+student_010,Probability,1,2024-01-05T04:48:00
+student_010,Linear Equations,1,2024-01-05T05:02:00
+student_010,Combinatorics,0,2024-01-05T05:13:00
+student_010,Number Theory,1,2024-01-05T05:16:00
+student_011,Quadratic Functions,0,2024-01-05T14:00:00
+student_011,Geometry Fundamentals,1,2024-01-05T14:03:00
+student_011,Probability,0,2024-01-05T14:07:00
+student_011,Trigonometry,0,2024-01-05T14:20:00
+student_011,Number Theory,1,2024-01-05T14:34:00
+student_011,Number Theory,1,2024-01-05T14:49:00
+student_011,Linear Equations,0,2024-01-05T15:01:00
+student_011,Trigonometry,1,2024-01-05T15:05:00
+student_011,Number Theory,1,2024-01-05T15:08:00
+student_011,Combinatorics,1,2024-01-05T15:14:00
+student_012,Geometry Fundamentals,0,2024-01-06T00:00:00
+student_012,Trigonometry,1,2024-01-06T00:15:00
+student_012,Algebra Basics,1,2024-01-06T00:21:00
+student_012,Trigonometry,1,2024-01-06T00:29:00
+student_012,Quadratic Functions,0,2024-01-06T00:36:00
+student_012,Quadratic Functions,0,2024-01-06T00:42:00
+student_012,Statistics,1,2024-01-06T00:52:00
+student_012,Linear Equations,0,2024-01-06T00:55:00
+student_012,Quadratic Functions,1,2024-01-06T01:08:00
+student_012,Calculus Intro,1,2024-01-06T01:23:00
+student_013,Statistics,1,2024-01-06T10:00:00
+student_013,Calculus Intro,0,2024-01-06T10:06:00
+student_013,Algebra Basics,0,2024-01-06T10:20:00
+student_013,Geometry Fundamentals,0,2024-01-06T10:25:00
+student_013,Number Theory,0,2024-01-06T10:32:00
+student_013,Combinatorics,0,2024-01-06T10:40:00
+student_013,Quadratic Functions,0,2024-01-06T10:45:00
+student_013,Quadratic Functions,0,2024-01-06T10:59:00
+student_013,Quadratic Functions,0,2024-01-06T11:01:00
+student_013,Statistics,0,2024-01-06T11:08:00
+student_014,Geometry Fundamentals,1,2024-01-06T20:00:00
+student_014,Linear Equations,1,2024-01-06T20:14:00
+student_014,Probability,1,2024-01-06T20:16:00
+student_014,Probability,1,2024-01-06T20:31:00
+student_014,Geometry Fundamentals,1,2024-01-06T20:46:00
+student_014,Geometry Fundamentals,1,2024-01-06T20:58:00
+student_014,Linear Equations,0,2024-01-06T21:04:00
+student_014,Calculus Intro,0,2024-01-06T21:10:00
+student_014,Number Theory,1,2024-01-06T21:18:00
+student_014,Linear Equations,0,2024-01-06T21:20:00
+student_015,Quadratic Functions,1,2024-01-07T06:00:00
+student_015,Algebra Basics,1,2024-01-07T06:06:00
+student_015,Calculus Intro,0,2024-01-07T06:14:00
+student_015,Statistics,1,2024-01-07T06:21:00
+student_015,Linear Equations,1,2024-01-07T06:31:00
+student_015,Geometry Fundamentals,1,2024-01-07T06:42:00
+student_015,Statistics,1,2024-01-07T06:55:00
+student_015,Number Theory,0,2024-01-07T07:09:00
+student_015,Geometry Fundamentals,1,2024-01-07T07:22:00
+student_015,Calculus Intro,0,2024-01-07T07:25:00
+student_016,Linear Equations,0,2024-01-07T16:00:00
+student_016,Number Theory,1,2024-01-07T16:06:00
+student_016,Calculus Intro,1,2024-01-07T16:14:00
+student_016,Number Theory,1,2024-01-07T16:20:00
+student_016,Statistics,0,2024-01-07T16:28:00
+student_016,Combinatorics,0,2024-01-07T16:32:00
+student_016,Number Theory,0,2024-01-07T16:40:00
+student_016,Trigonometry,1,2024-01-07T16:46:00
+student_016,Combinatorics,0,2024-01-07T17:00:00
+student_016,Probability,0,2024-01-07T17:07:00
+student_017,Geometry Fundamentals,1,2024-01-08T02:00:00
+student_017,Quadratic Functions,0,2024-01-08T02:14:00
+student_017,Number Theory,0,2024-01-08T02:20:00
+student_017,Calculus Intro,1,2024-01-08T02:31:00
+student_017,Geometry Fundamentals,0,2024-01-08T02:45:00
+student_017,Geometry Fundamentals,1,2024-01-08T02:50:00
+student_017,Geometry Fundamentals,0,2024-01-08T02:52:00
+student_017,Linear Equations,1,2024-01-08T03:03:00
+student_017,Combinatorics,1,2024-01-08T03:15:00
+student_017,Statistics,1,2024-01-08T03:28:00
+student_018,Quadratic Functions,0,2024-01-08T12:00:00
+student_018,Linear Equations,0,2024-01-08T12:02:00
+student_018,Quadratic Functions,0,2024-01-08T12:07:00
+student_018,Number Theory,1,2024-01-08T12:20:00
+student_018,Geometry Fundamentals,0,2024-01-08T12:30:00
+student_018,Probability,1,2024-01-08T12:33:00
+student_018,Number Theory,0,2024-01-08T12:42:00
+student_018,Calculus Intro,0,2024-01-08T12:53:00
+student_018,Combinatorics,0,2024-01-08T13:02:00
+student_018,Statistics,0,2024-01-08T13:12:00
+student_019,Probability,0,2024-01-08T22:00:00
+student_019,Probability,1,2024-01-08T22:13:00
+student_019,Geometry Fundamentals,0,2024-01-08T22:27:00
+student_019,Number Theory,1,2024-01-08T22:33:00
+student_019,Trigonometry,1,2024-01-08T22:38:00
+student_019,Trigonometry,1,2024-01-08T22:51:00
+student_019,Calculus Intro,0,2024-01-08T22:58:00
+student_019,Quadratic Functions,1,2024-01-08T23:01:00
+student_019,Quadratic Functions,0,2024-01-08T23:09:00
+student_019,Statistics,1,2024-01-08T23:12:00
+student_020,Probability,1,2024-01-09T08:00:00
+student_020,Statistics,1,2024-01-09T08:05:00
+student_020,Combinatorics,0,2024-01-09T08:19:00
+student_020,Combinatorics,1,2024-01-09T08:21:00
+student_020,Calculus Intro,1,2024-01-09T08:23:00
+student_020,Statistics,0,2024-01-09T08:31:00
+student_020,Number Theory,0,2024-01-09T08:44:00
+student_020,Probability,1,2024-01-09T08:49:00
+student_020,Probability,1,2024-01-09T08:57:00
+student_020,Statistics,0,2024-01-09T09:04:00
+student_021,Probability,0,2024-01-09T18:00:00
+student_021,Number Theory,1,2024-01-09T18:11:00
+student_021,Combinatorics,1,2024-01-09T18:19:00
+student_021,Linear Equations,1,2024-01-09T18:21:00
+student_021,Probability,1,2024-01-09T18:25:00
+student_021,Statistics,1,2024-01-09T18:31:00
+student_021,Calculus Intro,1,2024-01-09T18:40:00
+student_021,Trigonometry,0,2024-01-09T18:48:00
+student_021,Statistics,1,2024-01-09T19:03:00
+student_021,Probability,1,2024-01-09T19:06:00
+student_022,Algebra Basics,0,2024-01-10T04:00:00
+student_022,Geometry Fundamentals,0,2024-01-10T04:07:00
+student_022,Algebra Basics,0,2024-01-10T04:21:00
+student_022,Geometry Fundamentals,0,2024-01-10T04:26:00
+student_022,Quadratic Functions,1,2024-01-10T04:37:00
+student_022,Linear Equations,0,2024-01-10T04:46:00
+student_022,Probability,0,2024-01-10T04:51:00
+student_022,Calculus Intro,1,2024-01-10T05:05:00
+student_022,Linear Equations,0,2024-01-10T05:16:00
+student_022,Trigonometry,1,2024-01-10T05:20:00
+student_023,Trigonometry,1,2024-01-10T14:00:00
+student_023,Statistics,0,2024-01-10T14:08:00
+student_023,Linear Equations,0,2024-01-10T14:13:00
+student_023,Geometry Fundamentals,1,2024-01-10T14:28:00
+student_023,Trigonometry,0,2024-01-10T14:42:00
+student_023,Linear Equations,0,2024-01-10T14:53:00
+student_023,Algebra Basics,1,2024-01-10T15:04:00
+student_023,Calculus Intro,1,2024-01-10T15:12:00
+student_023,Calculus Intro,1,2024-01-10T15:24:00
+student_023,Probability,1,2024-01-10T15:32:00
+student_024,Probability,0,2024-01-11T00:00:00
+student_024,Quadratic Functions,0,2024-01-11T00:08:00
+student_024,Trigonometry,0,2024-01-11T00:20:00
+student_024,Probability,1,2024-01-11T00:30:00
+student_024,Combinatorics,1,2024-01-11T00:45:00
+student_024,Geometry Fundamentals,0,2024-01-11T01:00:00
+student_024,Trigonometry,0,2024-01-11T01:03:00
+student_024,Probability,0,2024-01-11T01:08:00
+student_024,Statistics,1,2024-01-11T01:20:00
+student_024,Calculus Intro,1,2024-01-11T01:29:00
+student_025,Calculus Intro,0,2024-01-11T10:00:00
+student_025,Trigonometry,0,2024-01-11T10:07:00
+student_025,Trigonometry,0,2024-01-11T10:20:00
+student_025,Geometry Fundamentals,1,2024-01-11T10:30:00
+student_025,Statistics,1,2024-01-11T10:43:00
+student_025,Geometry Fundamentals,0,2024-01-11T10:57:00
+student_025,Probability,1,2024-01-11T11:09:00
+student_025,Linear Equations,1,2024-01-11T11:11:00
+student_025,Geometry Fundamentals,1,2024-01-11T11:19:00
+student_025,Calculus Intro,1,2024-01-11T11:30:00
+student_026,Calculus Intro,1,2024-01-11T20:00:00
+student_026,Number Theory,1,2024-01-11T20:13:00
+student_026,Probability,1,2024-01-11T20:26:00
+student_026,Geometry Fundamentals,1,2024-01-11T20:32:00
+student_026,Calculus Intro,1,2024-01-11T20:37:00
+student_026,Quadratic Functions,1,2024-01-11T20:47:00
+student_026,Probability,1,2024-01-11T21:00:00
+student_026,Number Theory,1,2024-01-11T21:11:00
+student_026,Geometry Fundamentals,1,2024-01-11T21:14:00
+student_026,Quadratic Functions,1,2024-01-11T21:21:00
+student_027,Number Theory,1,2024-01-12T06:00:00
+student_027,Algebra Basics,0,2024-01-12T06:02:00
+student_027,Quadratic Functions,0,2024-01-12T06:15:00
+student_027,Probability,1,2024-01-12T06:29:00
+student_027,Combinatorics,1,2024-01-12T06:31:00
+student_027,Probability,1,2024-01-12T06:40:00
+student_027,Trigonometry,0,2024-01-12T06:42:00
+student_027,Linear Equations,0,2024-01-12T06:51:00
+student_027,Probability,1,2024-01-12T06:59:00
+student_027,Algebra Basics,1,2024-01-12T07:11:00
+student_028,Combinatorics,0,2024-01-12T16:00:00
+student_028,Geometry Fundamentals,1,2024-01-12T16:03:00
+student_028,Statistics,0,2024-01-12T16:17:00
+student_028,Combinatorics,1,2024-01-12T16:31:00
+student_028,Statistics,1,2024-01-12T16:41:00
+student_028,Trigonometry,0,2024-01-12T16:50:00
+student_028,Trigonometry,0,2024-01-12T16:58:00
+student_028,Combinatorics,0,2024-01-12T17:00:00
+student_028,Geometry Fundamentals,0,2024-01-12T17:03:00
+student_028,Linear Equations,1,2024-01-12T17:09:00
+student_029,Number Theory,1,2024-01-13T02:00:00
+student_029,Statistics,1,2024-01-13T02:02:00
+student_029,Probability,1,2024-01-13T02:13:00
+student_029,Trigonometry,0,2024-01-13T02:18:00
+student_029,Probability,1,2024-01-13T02:31:00
+student_029,Trigonometry,0,2024-01-13T02:36:00
+student_029,Combinatorics,0,2024-01-13T02:48:00
+student_029,Statistics,1,2024-01-13T02:53:00
+student_029,Quadratic Functions,0,2024-01-13T02:58:00
+student_029,Quadratic Functions,1,2024-01-13T03:13:00
+student_030,Trigonometry,0,2024-01-13T12:00:00
+student_030,Combinatorics,0,2024-01-13T12:15:00
+student_030,Linear Equations,0,2024-01-13T12:24:00
+student_030,Statistics,0,2024-01-13T12:30:00
+student_030,Number Theory,0,2024-01-13T12:40:00
+student_030,Combinatorics,1,2024-01-13T12:43:00
+student_030,Calculus Intro,0,2024-01-13T12:51:00
+student_030,Linear Equations,1,2024-01-13T12:53:00
+student_030,Combinatorics,0,2024-01-13T13:05:00
+student_030,Trigonometry,0,2024-01-13T13:07:00
+student_031,Quadratic Functions,1,2024-01-13T22:00:00
+student_031,Probability,0,2024-01-13T22:12:00
+student_031,Combinatorics,1,2024-01-13T22:16:00
+student_031,Probability,0,2024-01-13T22:31:00
+student_031,Calculus Intro,1,2024-01-13T22:40:00
+student_031,Linear Equations,0,2024-01-13T22:47:00
+student_031,Statistics,0,2024-01-13T22:54:00
+student_031,Statistics,0,2024-01-13T23:00:00
+student_031,Algebra Basics,1,2024-01-13T23:10:00
+student_031,Trigonometry,1,2024-01-13T23:17:00
+student_032,Statistics,0,2024-01-14T08:00:00
+student_032,Algebra Basics,0,2024-01-14T08:15:00
+student_032,Probability,1,2024-01-14T08:25:00
+student_032,Number Theory,1,2024-01-14T08:30:00
+student_032,Probability,0,2024-01-14T08:44:00
+student_032,Algebra Basics,1,2024-01-14T08:58:00
+student_032,Quadratic Functions,0,2024-01-14T09:08:00
+student_032,Probability,1,2024-01-14T09:17:00
+student_032,Combinatorics,0,2024-01-14T09:29:00
+student_032,Quadratic Functions,1,2024-01-14T09:42:00
+student_033,Number Theory,0,2024-01-14T18:00:00
+student_033,Linear Equations,0,2024-01-14T18:05:00
+student_033,Quadratic Functions,0,2024-01-14T18:08:00
+student_033,Trigonometry,0,2024-01-14T18:21:00
+student_033,Statistics,0,2024-01-14T18:27:00
+student_033,Geometry Fundamentals,0,2024-01-14T18:36:00
+student_033,Statistics,1,2024-01-14T18:40:00
+student_033,Number Theory,0,2024-01-14T18:51:00
+student_033,Linear Equations,1,2024-01-14T18:55:00
+student_033,Statistics,1,2024-01-14T19:09:00
+student_034,Number Theory,1,2024-01-15T04:00:00
+student_034,Trigonometry,0,2024-01-15T04:02:00
+student_034,Combinatorics,0,2024-01-15T04:17:00
+student_034,Probability,0,2024-01-15T04:29:00
+student_034,Number Theory,0,2024-01-15T04:38:00
+student_034,Number Theory,0,2024-01-15T04:45:00
+student_034,Probability,0,2024-01-15T04:53:00
+student_034,Geometry Fundamentals,0,2024-01-15T05:08:00
+student_034,Combinatorics,1,2024-01-15T05:13:00
+student_034,Statistics,1,2024-01-15T05:28:00
+student_035,Probability,0,2024-01-15T14:00:00
+student_035,Statistics,1,2024-01-15T14:14:00
+student_035,Quadratic Functions,1,2024-01-15T14:26:00
+student_035,Quadratic Functions,1,2024-01-15T14:28:00
+student_035,Calculus Intro,0,2024-01-15T14:39:00
+student_035,Probability,1,2024-01-15T14:54:00
+student_035,Algebra Basics,0,2024-01-15T15:03:00
+student_035,Quadratic Functions,1,2024-01-15T15:11:00
+student_035,Trigonometry,1,2024-01-15T15:25:00
+student_035,Statistics,0,2024-01-15T15:38:00
+student_036,Calculus Intro,0,2024-01-16T00:00:00
+student_036,Number Theory,1,2024-01-16T00:15:00
+student_036,Probability,0,2024-01-16T00:22:00
+student_036,Combinatorics,1,2024-01-16T00:24:00
+student_036,Trigonometry,0,2024-01-16T00:36:00
+student_036,Linear Equations,1,2024-01-16T00:49:00
+student_036,Linear Equations,1,2024-01-16T00:52:00
+student_036,Trigonometry,0,2024-01-16T01:05:00
+student_036,Calculus Intro,0,2024-01-16T01:07:00
+student_036,Calculus Intro,1,2024-01-16T01:13:00
+student_037,Geometry Fundamentals,1,2024-01-16T10:00:00
+student_037,Quadratic Functions,1,2024-01-16T10:11:00
+student_037,Combinatorics,0,2024-01-16T10:14:00
+student_037,Geometry Fundamentals,1,2024-01-16T10:25:00
+student_037,Quadratic Functions,1,2024-01-16T10:36:00
+student_037,Trigonometry,1,2024-01-16T10:48:00
+student_037,Algebra Basics,0,2024-01-16T11:00:00
+student_037,Trigonometry,1,2024-01-16T11:09:00
+student_037,Linear Equations,1,2024-01-16T11:13:00
+student_037,Combinatorics,1,2024-01-16T11:20:00
+student_038,Trigonometry,1,2024-01-16T20:00:00
+student_038,Geometry Fundamentals,0,2024-01-16T20:06:00
+student_038,Probability,1,2024-01-16T20:21:00
+student_038,Combinatorics,1,2024-01-16T20:29:00
+student_038,Trigonometry,1,2024-01-16T20:35:00
+student_038,Statistics,1,2024-01-16T20:50:00
+student_038,Algebra Basics,0,2024-01-16T21:01:00
+student_038,Probability,0,2024-01-16T21:14:00
+student_038,Geometry Fundamentals,0,2024-01-16T21:20:00
+student_038,Geometry Fundamentals,0,2024-01-16T21:27:00
+student_039,Trigonometry,0,2024-01-17T06:00:00
+student_039,Quadratic Functions,0,2024-01-17T06:13:00
+student_039,Algebra Basics,1,2024-01-17T06:25:00
+student_039,Algebra Basics,0,2024-01-17T06:34:00
+student_039,Quadratic Functions,1,2024-01-17T06:47:00
+student_039,Calculus Intro,0,2024-01-17T06:53:00
+student_039,Geometry Fundamentals,1,2024-01-17T06:57:00
+student_039,Calculus Intro,0,2024-01-17T07:07:00
+student_039,Quadratic Functions,1,2024-01-17T07:13:00
+student_039,Probability,0,2024-01-17T07:28:00
+student_040,Calculus Intro,0,2024-01-17T16:00:00
+student_040,Linear Equations,1,2024-01-17T16:09:00
+student_040,Statistics,0,2024-01-17T16:14:00
+student_040,Number Theory,1,2024-01-17T16:28:00
+student_040,Statistics,1,2024-01-17T16:42:00
+student_040,Linear Equations,0,2024-01-17T16:52:00
+student_040,Trigonometry,0,2024-01-17T17:04:00
+student_040,Calculus Intro,1,2024-01-17T17:19:00
+student_040,Probability,1,2024-01-17T17:24:00
+student_040,Calculus Intro,0,2024-01-17T17:34:00
+student_041,Linear Equations,0,2024-01-18T02:00:00
+student_041,Trigonometry,0,2024-01-18T02:09:00
+student_041,Quadratic Functions,1,2024-01-18T02:12:00
+student_041,Trigonometry,0,2024-01-18T02:14:00
+student_041,Linear Equations,1,2024-01-18T02:17:00
+student_041,Quadratic Functions,1,2024-01-18T02:27:00
+student_041,Number Theory,1,2024-01-18T02:34:00
+student_041,Quadratic Functions,0,2024-01-18T02:47:00
+student_041,Linear Equations,0,2024-01-18T02:59:00
+student_041,Statistics,0,2024-01-18T03:10:00
+student_042,Algebra Basics,1,2024-01-18T12:00:00
+student_042,Probability,1,2024-01-18T12:05:00
+student_042,Calculus Intro,1,2024-01-18T12:10:00
+student_042,Calculus Intro,1,2024-01-18T12:22:00
+student_042,Calculus Intro,1,2024-01-18T12:34:00
+student_042,Geometry Fundamentals,0,2024-01-18T12:40:00
+student_042,Probability,1,2024-01-18T12:55:00
+student_042,Combinatorics,0,2024-01-18T13:00:00
+student_042,Calculus Intro,1,2024-01-18T13:02:00
+student_042,Combinatorics,1,2024-01-18T13:06:00
+student_043,Number Theory,1,2024-01-18T22:00:00
+student_043,Geometry Fundamentals,1,2024-01-18T22:05:00
+student_043,Combinatorics,1,2024-01-18T22:09:00
+student_043,Quadratic Functions,0,2024-01-18T22:24:00
+student_043,Trigonometry,0,2024-01-18T22:34:00
+student_043,Algebra Basics,1,2024-01-18T22:37:00
+student_043,Geometry Fundamentals,0,2024-01-18T22:44:00
+student_043,Quadratic Functions,1,2024-01-18T22:46:00
+student_043,Statistics,0,2024-01-18T22:50:00
+student_043,Linear Equations,0,2024-01-18T23:03:00
+student_044,Calculus Intro,0,2024-01-19T08:00:00
+student_044,Probability,1,2024-01-19T08:03:00
+student_044,Algebra Basics,0,2024-01-19T08:14:00
+student_044,Number Theory,1,2024-01-19T08:29:00
+student_044,Algebra Basics,1,2024-01-19T08:41:00
+student_044,Statistics,1,2024-01-19T08:50:00
+student_044,Probability,0,2024-01-19T08:53:00
+student_044,Linear Equations,0,2024-01-19T09:02:00
+student_044,Combinatorics,1,2024-01-19T09:09:00
+student_044,Trigonometry,0,2024-01-19T09:13:00
+student_045,Number Theory,0,2024-01-19T18:00:00
+student_045,Combinatorics,1,2024-01-19T18:08:00
+student_045,Number Theory,0,2024-01-19T18:17:00
+student_045,Linear Equations,0,2024-01-19T18:20:00
+student_045,Number Theory,0,2024-01-19T18:32:00
+student_045,Statistics,1,2024-01-19T18:37:00
+student_045,Statistics,1,2024-01-19T18:42:00
+student_045,Statistics,1,2024-01-19T18:51:00
+student_045,Calculus Intro,1,2024-01-19T18:54:00
+student_045,Trigonometry,1,2024-01-19T19:06:00
+student_046,Probability,1,2024-01-20T04:00:00
+student_046,Linear Equations,1,2024-01-20T04:15:00
+student_046,Calculus Intro,0,2024-01-20T04:18:00
+student_046,Algebra Basics,0,2024-01-20T04:28:00
+student_046,Number Theory,1,2024-01-20T04:38:00
+student_046,Statistics,1,2024-01-20T04:41:00
+student_046,Statistics,0,2024-01-20T04:53:00
+student_046,Algebra Basics,0,2024-01-20T05:06:00
+student_046,Trigonometry,1,2024-01-20T05:17:00
+student_046,Number Theory,1,2024-01-20T05:28:00
+student_047,Probability,1,2024-01-20T14:00:00
+student_047,Calculus Intro,0,2024-01-20T14:03:00
+student_047,Linear Equations,0,2024-01-20T14:10:00
+student_047,Geometry Fundamentals,0,2024-01-20T14:21:00
+student_047,Number Theory,0,2024-01-20T14:36:00
+student_047,Combinatorics,1,2024-01-20T14:51:00
+student_047,Number Theory,1,2024-01-20T15:03:00
+student_047,Trigonometry,1,2024-01-20T15:15:00
+student_047,Trigonometry,0,2024-01-20T15:21:00
+student_047,Algebra Basics,1,2024-01-20T15:28:00
+student_048,Combinatorics,0,2024-01-21T00:00:00
+student_048,Quadratic Functions,0,2024-01-21T00:03:00
+student_048,Linear Equations,0,2024-01-21T00:05:00
+student_048,Statistics,1,2024-01-21T00:10:00
+student_048,Quadratic Functions,1,2024-01-21T00:17:00
+student_048,Calculus Intro,0,2024-01-21T00:30:00
+student_048,Combinatorics,1,2024-01-21T00:41:00
+student_048,Quadratic Functions,1,2024-01-21T00:43:00
+student_048,Algebra Basics,0,2024-01-21T00:54:00
+student_048,Probability,0,2024-01-21T01:00:00
+student_049,Combinatorics,0,2024-01-21T10:00:00
+student_049,Geometry Fundamentals,0,2024-01-21T10:06:00
+student_049,Calculus Intro,0,2024-01-21T10:09:00
+student_049,Combinatorics,0,2024-01-21T10:15:00
+student_049,Trigonometry,1,2024-01-21T10:27:00
+student_049,Combinatorics,1,2024-01-21T10:35:00
+student_049,Trigonometry,0,2024-01-21T10:40:00
+student_049,Quadratic Functions,0,2024-01-21T10:54:00
+student_049,Calculus Intro,1,2024-01-21T11:00:00
+student_049,Statistics,1,2024-01-21T11:09:00

@@ -1,0 +1,867 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Adaptive Learning System Lab</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@3.0.1/dist/chartjs-plugin-annotation.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0a0e1a;
+  --bg2: #0f1626;
+  --bg3: #161d30;
+  --border: #1e2d4a;
+  --accent: #00d4ff;
+  --accent2: #7c3aed;
+  --accent3: #10b981;
+  --accent4: #f59e0b;
+  --accent5: #ef4444;
+  --text: #e2e8f0;
+  --text2: #94a3b8;
+  --text3: #64748b;
+  --card: #111827;
+  --glow: 0 0 20px rgba(0,212,255,0.15);
+
+  --c1: #00d4ff; --c2: #7c3aed; --c3: #10b981; --c4: #f59e0b; --c5: #ef4444;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; overflow: hidden; background: var(--bg); color: var(--text); font-family: 'DM Sans', sans-serif; }
+
+/* ── LAYOUT ── */
+.shell { display: grid; grid-template-rows: 56px 1fr; height: 100vh; }
+.topbar {
+  background: var(--bg2); border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; gap: 16px; padding: 0 20px;
+  position: relative; z-index: 100;
+}
+.logo { font-family: 'Space Mono', monospace; font-size: 13px; color: var(--accent); letter-spacing: 2px; white-space: nowrap; }
+.logo span { color: var(--text2); }
+.badge { background: rgba(0,212,255,0.1); border: 1px solid rgba(0,212,255,0.3); color: var(--accent); font-size: 10px; font-family: 'Space Mono'; padding: 2px 8px; border-radius: 3px; }
+.spacer { flex: 1; }
+#statusBar { font-size: 12px; color: var(--text3); font-family: 'Space Mono'; max-width: 400px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent3); display: inline-block; margin-right: 6px; }
+.dot.running { background: var(--accent4); animation: pulse 1s infinite; }
+.dot.error { background: var(--accent5); }
+
+.body { display: grid; grid-template-columns: 260px 1fr; overflow: hidden; }
+
+/* ── SIDEBAR ── */
+.sidebar {
+  background: var(--bg2); border-right: 1px solid var(--border);
+  display: flex; flex-direction: column; overflow-y: auto; padding: 16px;
+  gap: 16px;
+}
+.section-label { font-size: 10px; font-family: 'Space Mono'; color: var(--text3); letter-spacing: 2px; text-transform: uppercase; padding: 4px 0 8px; border-bottom: 1px solid var(--border); margin-bottom: 4px; }
+
+.ds-card {
+  border: 1px solid var(--border); border-radius: 8px; padding: 10px 12px;
+  cursor: pointer; transition: all 0.2s; background: var(--bg3);
+}
+.ds-card:hover { border-color: var(--accent); background: rgba(0,212,255,0.05); }
+.ds-card.active { border-color: var(--accent); background: rgba(0,212,255,0.08); box-shadow: var(--glow); }
+.ds-name { font-size: 13px; font-weight: 600; margin-bottom: 2px; }
+.ds-desc { font-size: 11px; color: var(--text3); line-height: 1.4; }
+
+.param-row { display: flex; flex-direction: column; gap: 4px; margin-bottom: 10px; }
+.param-row label { font-size: 11px; color: var(--text2); display: flex; justify-content: space-between; }
+.param-row label span { color: var(--accent); font-family: 'Space Mono'; }
+input[type=range] { width: 100%; accent-color: var(--accent); cursor: pointer; }
+select, .multi-check { background: var(--bg3); border: 1px solid var(--border); color: var(--text); border-radius: 6px; padding: 6px 10px; font-size: 12px; width: 100%; }
+
+.strat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+.strat-btn {
+  border: 1px solid var(--border); background: var(--bg3); color: var(--text2);
+  border-radius: 6px; padding: 6px 8px; font-size: 11px; cursor: pointer; text-align: center; transition: all 0.15s;
+  font-family: 'DM Sans';
+}
+.strat-btn:hover { border-color: var(--accent2); color: var(--text); }
+.strat-btn.active { border-color: var(--accent2); background: rgba(124,58,237,0.15); color: var(--accent2); }
+
+.run-btn {
+  width: 100%; padding: 12px; border-radius: 8px; border: none; cursor: pointer;
+  font-size: 14px; font-weight: 700; font-family: 'DM Sans';
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  color: white; transition: all 0.2s; letter-spacing: 0.5px;
+}
+.run-btn:hover { opacity: 0.9; transform: translateY(-1px); box-shadow: 0 4px 20px rgba(0,212,255,0.3); }
+.run-btn:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
+
+.precomp-btn {
+  width: 100%; padding: 8px; border-radius: 6px; border: 1px solid var(--border);
+  background: var(--bg3); color: var(--text2); cursor: pointer; font-size: 12px; font-family: 'DM Sans';
+  transition: all 0.15s;
+}
+.precomp-btn:hover { border-color: var(--accent3); color: var(--accent3); }
+
+/* ── MAIN PANEL ── */
+.main { display: flex; flex-direction: column; overflow: hidden; }
+.tabs { display: flex; background: var(--bg2); border-bottom: 1px solid var(--border); padding: 0 20px; }
+.tab {
+  padding: 14px 20px; font-size: 13px; font-weight: 500; cursor: pointer;
+  color: var(--text3); border-bottom: 2px solid transparent; transition: all 0.15s; white-space: nowrap;
+}
+.tab:hover { color: var(--text); }
+.tab.active { color: var(--accent); border-bottom-color: var(--accent); }
+
+.tab-content { flex: 1; overflow-y: auto; padding: 20px; display: none; }
+.tab-content.active { display: block; }
+
+/* ── GRID LAYOUTS ── */
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+.grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+
+/* ── CARDS ── */
+.card {
+  background: var(--card); border: 1px solid var(--border); border-radius: 10px;
+  padding: 16px; position: relative; overflow: hidden;
+}
+.card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; }
+.card.c1::before { background: var(--c1); }
+.card.c2::before { background: var(--c2); }
+.card.c3::before { background: var(--c3); }
+.card.c4::before { background: var(--c4); }
+.card.c5::before { background: var(--c5); }
+
+.card-title { font-size: 11px; color: var(--text3); font-family: 'Space Mono'; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; }
+.card-value { font-size: 28px; font-weight: 700; font-family: 'Space Mono'; color: var(--text); }
+.card-sub { font-size: 12px; color: var(--text3); margin-top: 4px; }
+
+.chart-card {
+  background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 16px;
+}
+.chart-title { font-size: 12px; font-weight: 600; color: var(--text2); margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
+.chart-title .ct-dot { width: 8px; height: 8px; border-radius: 50%; }
+.chart-wrap { position: relative; height: 200px; }
+
+/* ── PROGRESS BAR ── */
+.progress-wrap { margin: 12px 0; }
+.progress-bar { height: 4px; background: var(--border); border-radius: 2px; overflow: hidden; }
+.progress-fill { height: 100%; background: linear-gradient(90deg, var(--accent), var(--accent2)); transition: width 0.3s; border-radius: 2px; }
+.progress-text { font-size: 11px; color: var(--text3); margin-top: 4px; font-family: 'Space Mono'; }
+
+/* ── TABLE ── */
+.data-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.data-table th { text-align: left; padding: 8px 12px; background: var(--bg3); color: var(--text3); font-size: 11px; font-family: 'Space Mono'; letter-spacing: 1px; border-bottom: 1px solid var(--border); }
+.data-table td { padding: 8px 12px; border-bottom: 1px solid var(--border); color: var(--text); }
+.data-table tr:last-child td { border-bottom: none; }
+.data-table tr:hover td { background: rgba(255,255,255,0.02); }
+.rank-1 { color: var(--accent3); font-weight: 700; }
+.rank-2 { color: var(--accent); }
+.rank-3 { color: var(--accent4); }
+
+/* ── HEATMAP ── */
+.heatmap-grid { display: grid; gap: 3px; }
+.heatmap-cell {
+  border-radius: 3px; height: 28px; display: flex; align-items: center; justify-content: center;
+  font-size: 10px; font-family: 'Space Mono'; transition: all 0.2s; cursor: default;
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap; padding: 0 4px;
+}
+.heatmap-cell:hover { transform: scale(1.05); z-index: 10; position: relative; }
+
+/* ── REPORT ── */
+.report-section { margin-bottom: 24px; }
+.report-section h3 { font-family: 'Space Mono'; font-size: 12px; color: var(--accent); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 12px; border-bottom: 1px solid var(--border); padding-bottom: 8px; }
+.placeholder-box {
+  background: var(--bg3); border: 1px solid var(--border); border-radius: 6px; padding: 10px 14px;
+  font-size: 12px; color: var(--text2); margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center;
+  font-family: 'Space Mono';
+}
+.placeholder-box .pval { color: var(--accent3); font-weight: 700; }
+.text-block { background: var(--bg3); border-left: 3px solid var(--accent); padding: 12px 16px; border-radius: 0 6px 6px 0; font-size: 13px; line-height: 1.7; color: var(--text2); }
+
+/* ── ANIMATIONS ── */
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
+@keyframes fadeIn { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:translateY(0)} }
+.fade-in { animation: fadeIn 0.4s ease forwards; }
+
+/* ── EMPTY STATE ── */
+.empty { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 60px 20px; text-align: center; }
+.empty-icon { font-size: 48px; margin-bottom: 16px; }
+.empty-title { font-size: 18px; font-weight: 600; margin-bottom: 8px; }
+.empty-sub { font-size: 14px; color: var(--text3); max-width: 400px; line-height: 1.6; }
+
+/* ── SCROLLBAR ── */
+::-webkit-scrollbar { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+
+/* ── TOOLTIP ── */
+.tooltip { position: relative; }
+.tooltip:hover::after {
+  content: attr(data-tip); position: absolute; bottom: 100%; left: 50%; transform: translateX(-50%);
+  background: #1e293b; border: 1px solid var(--border); color: var(--text); font-size: 11px;
+  padding: 4px 8px; border-radius: 4px; white-space: nowrap; z-index: 999; margin-bottom: 4px;
+}
+
+/* Strategy colors */
+.s-adaptive { color: var(--c1); }
+.s-random { color: var(--c5); }
+.s-fixed_sequence { color: var(--c4); }
+.s-weakest_first { color: var(--c3); }
+.s-review_based { color: var(--c2); }
+
+.chip { display: inline-block; padding: 2px 8px; border-radius: 3px; font-size: 11px; font-family: 'Space Mono'; }
+.chip-green { background: rgba(16,185,129,0.15); color: var(--c3); border: 1px solid rgba(16,185,129,0.3); }
+.chip-blue { background: rgba(0,212,255,0.1); color: var(--c1); border: 1px solid rgba(0,212,255,0.3); }
+.chip-purple { background: rgba(124,58,237,0.15); color: var(--c2); border: 1px solid rgba(124,58,237,0.3); }
+
+.no-data { text-align: center; padding: 30px; color: var(--text3); font-size: 13px; font-family: 'Space Mono'; }
+
+@media (max-width: 900px) {
+  .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+  .body { grid-template-columns: 1fr; }
+  .sidebar { display: none; }
+}
+</style>
+</head>
+<body>
+<div class="shell">
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <div class="logo">ALS<span>·</span>LAB <span style="color:var(--text3)">v1.0</span></div>
+  <span class="badge">BKT + SM-2</span>
+  <span class="badge" style="border-color:rgba(124,58,237,0.4);color:var(--accent2);background:rgba(124,58,237,0.08)">Research</span>
+  <div class="spacer"></div>
+  <span id="statusDot" class="dot"></span>
+  <span id="statusBar">Ready — Select dataset and press Run</span>
+  <span id="progressPct" style="font-size:12px;color:var(--accent);font-family:'Space Mono';margin-left:8px;"></span>
+</div>
+
+<div class="body">
+
+<!-- SIDEBAR -->
+<div class="sidebar">
+  <div>
+    <div class="section-label">Dataset</div>
+    <div id="datasetList" style="display:flex;flex-direction:column;gap:8px;"></div>
+  </div>
+
+  <div>
+    <div class="section-label">Parameters</div>
+    <div class="param-row">
+      <label>Students <span id="v_students">30</span></label>
+      <input type="range" id="p_students" min="10" max="80" value="30" oninput="document.getElementById('v_students').textContent=this.value">
+    </div>
+    <div class="param-row">
+      <label>Steps/Student <span id="v_steps">50</span></label>
+      <input type="range" id="p_steps" min="20" max="100" value="50" oninput="document.getElementById('v_steps').textContent=this.value">
+    </div>
+    <div class="param-row">
+      <label>Mastery Threshold <span id="v_mastery">0.80</span></label>
+      <input type="range" id="p_mastery" min="0.5" max="0.95" step="0.05" value="0.80" oninput="document.getElementById('v_mastery').textContent=parseFloat(this.value).toFixed(2)">
+    </div>
+    <div class="param-row">
+      <label>BKT p_init <span id="v_pinit">0.30</span></label>
+      <input type="range" id="p_pinit" min="0.1" max="0.6" step="0.05" value="0.30" oninput="document.getElementById('v_pinit').textContent=parseFloat(this.value).toFixed(2)">
+    </div>
+    <div class="param-row">
+      <label>BKT p_transit <span id="v_ptransit">0.10</span></label>
+      <input type="range" id="p_ptransit" min="0.05" max="0.3" step="0.05" value="0.10" oninput="document.getElementById('v_ptransit').textContent=parseFloat(this.value).toFixed(2)">
+    </div>
+  </div>
+
+  <div>
+    <div class="section-label">Strategies</div>
+    <div class="strat-grid" id="stratGrid"></div>
+  </div>
+
+  <div>
+    <button class="run-btn" id="runBtn" onclick="runExperiment()">▶ Run Experiment</button>
+    <div class="progress-wrap" id="progressWrap" style="display:none">
+      <div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+      <div class="progress-text" id="progressText">Initializing...</div>
+    </div>
+    <div style="height:8px"></div>
+    <button class="precomp-btn" onclick="precomputeAll()">⚡ Precompute All Datasets</button>
+  </div>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+  <div class="tabs">
+    <div class="tab active" onclick="switchTab('overview')">Overview</div>
+    <div class="tab" onclick="switchTab('learning')">Learning Curves</div>
+    <div class="tab" onclick="switchTab('strategies')">Strategy Analysis</div>
+    <div class="tab" onclick="switchTab('heatmap')">Skill Heatmap</div>
+    <div class="tab" onclick="switchTab('report')">Report Outputs</div>
+  </div>
+
+  <!-- OVERVIEW -->
+  <div class="tab-content active" id="tab-overview">
+    <div id="overviewContent">
+      <div class="empty">
+        <div class="empty-icon">🧠</div>
+        <div class="empty-title">Adaptive Learning System Lab</div>
+        <div class="empty-sub">Select a dataset, configure parameters, then click <strong>Run Experiment</strong> or <strong>Precompute All Datasets</strong> to load all three datasets instantly.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- LEARNING CURVES -->
+  <div class="tab-content" id="tab-learning">
+    <div id="learningContent">
+      <div class="no-data">Run an experiment to see learning curves</div>
+    </div>
+  </div>
+
+  <!-- STRATEGIES -->
+  <div class="tab-content" id="tab-strategies">
+    <div id="strategyContent">
+      <div class="no-data">Run an experiment to see strategy comparisons</div>
+    </div>
+  </div>
+
+  <!-- HEATMAP -->
+  <div class="tab-content" id="tab-heatmap">
+    <div id="heatmapContent">
+      <div class="no-data">Run an experiment to see skill heatmap</div>
+    </div>
+  </div>
+
+  <!-- REPORT -->
+  <div class="tab-content" id="tab-report">
+    <div id="reportContent">
+      <div class="no-data">Run an experiment to generate report placeholders</div>
+    </div>
+  </div>
+</div>
+
+</div>
+</div>
+
+<script>
+// ─── STATE ───
+const API = 'http://localhost:5000';
+let selectedDataset = 'synthetic';
+let selectedStrategies = ['adaptive','random','fixed_sequence','weakest_first','review_based'];
+let pollInterval = null;
+let charts = {};
+
+const STRAT_COLORS = {
+  adaptive: '#00d4ff', random: '#ef4444',
+  fixed_sequence: '#f59e0b', weakest_first: '#10b981', review_based: '#7c3aed'
+};
+const STRAT_LABELS = {
+  adaptive: 'Adaptive', random: 'Random',
+  fixed_sequence: 'Fixed Seq.', weakest_first: 'Weakest First', review_based: 'Review Based'
+};
+
+// ─── INIT ───
+async function init() {
+  await loadDatasets();
+  buildStratGrid();
+  setStatus('Ready — Select dataset and press Run', 'idle');
+}
+
+async function loadDatasets() {
+  try {
+    const r = await fetch(`${API}/api/datasets`);
+    const data = await r.json();
+    const list = document.getElementById('datasetList');
+    list.innerHTML = '';
+    for (const [key, info] of Object.entries(data)) {
+      const card = document.createElement('div');
+      card.className = 'ds-card' + (key === selectedDataset ? ' active' : '');
+      card.dataset.key = key;
+      card.innerHTML = `<div class="ds-name">${info.label}</div><div class="ds-desc">${info.description}</div>`;
+      card.onclick = () => selectDataset(key);
+      list.appendChild(card);
+    }
+  } catch(e) { setStatus('Server not reachable — start server.py first', 'error'); }
+}
+
+function selectDataset(key) {
+  selectedDataset = key;
+  document.querySelectorAll('.ds-card').forEach(c => c.classList.toggle('active', c.dataset.key === key));
+}
+
+function buildStratGrid() {
+  const grid = document.getElementById('stratGrid');
+  const strats = ['adaptive','random','fixed_sequence','weakest_first','review_based'];
+  grid.innerHTML = '';
+  strats.forEach(s => {
+    const btn = document.createElement('div');
+    btn.className = 'strat-btn active';
+    btn.dataset.strat = s;
+    btn.textContent = STRAT_LABELS[s];
+    btn.style.borderColor = STRAT_COLORS[s];
+    btn.style.color = STRAT_COLORS[s];
+    btn.style.background = `${STRAT_COLORS[s]}15`;
+    btn.onclick = () => toggleStrat(s, btn);
+    grid.appendChild(btn);
+  });
+}
+
+function toggleStrat(s, btn) {
+  if (selectedStrategies.includes(s)) {
+    if (selectedStrategies.length === 1) return;
+    selectedStrategies = selectedStrategies.filter(x => x !== s);
+    btn.classList.remove('active');
+    btn.style.background = 'var(--bg3)';
+    btn.style.color = 'var(--text3)';
+    btn.style.borderColor = 'var(--border)';
+  } else {
+    selectedStrategies.push(s);
+    btn.classList.add('active');
+    btn.style.borderColor = STRAT_COLORS[s];
+    btn.style.color = STRAT_COLORS[s];
+    btn.style.background = `${STRAT_COLORS[s]}15`;
+  }
+}
+
+// ─── RUN ───
+async function runExperiment() {
+  const btn = document.getElementById('runBtn');
+  btn.disabled = true;
+  document.getElementById('progressWrap').style.display = 'block';
+  setStatus('Starting experiment...', 'running');
+
+  try {
+    const body = {
+      dataset: selectedDataset,
+      n_students: parseInt(document.getElementById('p_students').value),
+      max_steps: parseInt(document.getElementById('p_steps').value),
+      mastery_threshold: parseFloat(document.getElementById('p_mastery').value),
+      strategies: selectedStrategies,
+      bkt_params: {
+        p_init: parseFloat(document.getElementById('p_pinit').value),
+        p_transit: parseFloat(document.getElementById('p_ptransit').value),
+        p_slip: 0.1, p_guess: 0.2
+      }
+    };
+    const r = await fetch(`${API}/api/run`, { method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify(body) });
+    if (!r.ok) { const e = await r.json(); throw new Error(e.error || 'Server error'); }
+    startPolling();
+  } catch(e) {
+    setStatus(`Error: ${e.message}`, 'error');
+    btn.disabled = false;
+    document.getElementById('progressWrap').style.display = 'none';
+  }
+}
+
+async function precomputeAll() {
+  setStatus('Precomputing all datasets...', 'running');
+  try {
+    await fetch(`${API}/api/precompute`, { method: 'POST' });
+    startPolling(true);
+  } catch(e) { setStatus('Precompute failed — is server running?', 'error'); }
+}
+
+function startPolling(isPrecompute = false) {
+  if (pollInterval) clearInterval(pollInterval);
+  pollInterval = setInterval(async () => {
+    try {
+      const r = await fetch(`${API}/api/status`);
+      const s = await r.json();
+      updateProgress(s.progress || 0, s.message || '');
+      setStatus(s.message || '', s.running ? 'running' : 'idle');
+      if (!s.running && s.progress >= 95) {
+        clearInterval(pollInterval);
+        await loadResults();
+        document.getElementById('runBtn').disabled = false;
+      } else if (!s.running && !isPrecompute) {
+        clearInterval(pollInterval);
+        document.getElementById('runBtn').disabled = false;
+        if (s.error) setStatus('Error: ' + s.message, 'error');
+      }
+    } catch(e) {}
+  }, 800);
+}
+
+function updateProgress(pct, msg) {
+  document.getElementById('progressFill').style.width = pct + '%';
+  document.getElementById('progressText').textContent = msg;
+  document.getElementById('progressPct').textContent = pct > 0 ? pct + '%' : '';
+}
+
+async function loadResults() {
+  try {
+    const r = await fetch(`${API}/api/results`);
+    if (!r.ok) return;
+    const data = await r.json();
+    renderAll(data);
+    setStatus(`Done — ${data.dataset_stats?.n_users || '?'} users, ${data.dataset_stats?.n_skills || '?'} skills`, 'idle');
+    document.getElementById('progressWrap').style.display = 'none';
+    document.getElementById('progressPct').textContent = '';
+  } catch(e) { console.error(e); }
+}
+
+// ─── RENDER ───
+function renderAll(data) {
+  renderOverview(data);
+  renderLearning(data);
+  renderStrategies(data);
+  renderHeatmap(data);
+  renderReport(data);
+}
+
+function renderOverview(data) {
+  const m = data.metrics;
+  const sm = m.strategy_metrics;
+  const report = data.report;
+  const vals = report.values;
+  const summary = m.summary_table;
+
+  const best = summary[0] || {};
+  const adaptive = sm.adaptive || {};
+
+  document.getElementById('overviewContent').innerHTML = `
+  <div class="fade-in">
+    <div class="grid-4" style="margin-bottom:16px">
+      ${kpiCard('Users Simulated', vals['Number of Users'], 'c1', 'students')}
+      ${kpiCard('Skills Tracked', vals['Number of Skills'], 'c2', 'skills')}
+      ${kpiCard('Avg Learning Gain', vals['Average Learning Gain'], 'c3', 'adaptive strategy')}
+      ${kpiCard('Optimal Reviews', vals['Optimal Review Percentage'], 'c4', 'review timing accuracy')}
+    </div>
+    <div class="grid-2" style="margin-bottom:16px">
+      <div class="chart-card">
+        <div class="chart-title"><span class="ct-dot" style="background:var(--c3)"></span>Strategy Comparison — Learning Gain</div>
+        <div class="chart-wrap"><canvas id="ov_strat"></canvas></div>
+      </div>
+      <div class="chart-card">
+        <div class="chart-title"><span class="ct-dot" style="background:var(--c2)"></span>Review Timing Distribution</div>
+        <div class="chart-wrap"><canvas id="ov_review"></canvas></div>
+      </div>
+    </div>
+    <div class="chart-card">
+      <div class="chart-title">Summary Table — All Strategies</div>
+      <table class="data-table">
+        <thead><tr><th>#</th><th>Strategy</th><th>Learning Gain</th><th>Mastery Count</th><th>Skill Coverage</th><th>Optimal Review</th></tr></thead>
+        <tbody>
+          ${summary.map((s,i) => `<tr class="${i===0?'rank-1':i===1?'rank-2':i===2?'rank-3':''}">
+            <td>${i+1}</td><td>${s.strategy.replace(/_/g,' ').replace(/\b\w/g,c=>c.toUpperCase())}</td>
+            <td>${s.learning_gain.toFixed(4)}</td><td>${s.mastery_count.toFixed(1)}</td>
+            <td>${(s.skill_coverage*100).toFixed(1)}%</td><td>${(s.optimal_review_pct*100).toFixed(1)}%</td>
+          </tr>`).join('')}
+        </tbody>
+      </table>
+    </div>
+  </div>`;
+
+  // Strategy bar chart
+  destroyChart('ov_strat');
+  const stratLabels = summary.map(s => STRAT_LABELS[s.strategy] || s.strategy);
+  const stratGains = summary.map(s => s.learning_gain);
+  const stratColors = summary.map(s => STRAT_COLORS[s.strategy] || '#666');
+  charts['ov_strat'] = new Chart(document.getElementById('ov_strat'), {
+    type: 'bar',
+    data: { labels: stratLabels, datasets: [{ data: stratGains, backgroundColor: stratColors.map(c => c + 'bb'), borderColor: stratColors, borderWidth: 2, borderRadius: 6 }] },
+    options: chartOpts({ scales: { y: { beginAtZero: true, title: { display: true, text: 'Gain', color: '#64748b' } } }, plugins: { legend: { display: false } } })
+  });
+
+  // Review timing donut for best strategy
+  const rt = m.review_timing[best.strategy] || {};
+  destroyChart('ov_review');
+  charts['ov_review'] = new Chart(document.getElementById('ov_review'), {
+    type: 'doughnut',
+    data: {
+      labels: ['Optimal', 'Early', 'Late'],
+      datasets: [{ data: [rt.optimal||0, rt.early||0, rt.late||0], backgroundColor: ['#10b981bb','#f59e0bbb','#ef4444bb'], borderColor: ['#10b981','#f59e0b','#ef4444'], borderWidth: 2 }]
+    },
+    options: chartOpts({ plugins: { legend: { position: 'right', labels: { color: '#94a3b8', font: { size: 11 } } } }, cutout: '65%' })
+  });
+}
+
+function kpiCard(title, value, color, sub) {
+  return `<div class="card ${color}"><div class="card-title">${title}</div><div class="card-value">${value}</div><div class="card-sub">${sub}</div></div>`;
+}
+
+function renderLearning(data) {
+  const m = data.metrics;
+  const lc = m.learning_curves;
+  const mc = m.mastery_curves;
+  const ra = m.rolling_accuracy;
+
+  const strats = Object.keys(lc);
+  if (!strats.length) { document.getElementById('learningContent').innerHTML = '<div class="no-data">No learning curve data</div>'; return; }
+
+  document.getElementById('learningContent').innerHTML = `
+  <div class="fade-in">
+    <div class="grid-2" style="margin-bottom:16px">
+      <div class="chart-card">
+        <div class="chart-title"><span class="ct-dot" style="background:var(--c1)"></span>Average Knowledge (P_know) Over Steps</div>
+        <div class="chart-wrap" style="height:240px"><canvas id="lc_know"></canvas></div>
+      </div>
+      <div class="chart-card">
+        <div class="chart-title"><span class="ct-dot" style="background:var(--c3)"></span>Mastery Progress (% Skills Mastered)</div>
+        <div class="chart-wrap" style="height:240px"><canvas id="lc_mastery"></canvas></div>
+      </div>
+    </div>
+    <div class="chart-card">
+      <div class="chart-title"><span class="ct-dot" style="background:var(--c4)"></span>Difficulty Balance — Rolling Accuracy (window=10)</div>
+      <div class="chart-wrap" style="height:200px"><canvas id="lc_balance"></canvas></div>
+    </div>
+  </div>`;
+
+  const maxLen = Math.max(...strats.map(s => lc[s]?.length || 0));
+  const labels = Array.from({length: maxLen}, (_,i) => i);
+
+  destroyChart('lc_know');
+  charts['lc_know'] = new Chart(document.getElementById('lc_know'), {
+    type: 'line',
+    data: { labels, datasets: strats.map(s => ({ label: STRAT_LABELS[s]||s, data: lc[s], borderColor: STRAT_COLORS[s], backgroundColor: 'transparent', borderWidth: 2, tension: 0.4, pointRadius: 0 })) },
+    options: chartOpts({ scales: { y: { min: 0, max: 1, title: { display: true, text: 'P(know)', color: '#64748b' } }, x: { title: { display: true, text: 'Step', color: '#64748b' } } } })
+  });
+
+  destroyChart('lc_mastery');
+  charts['lc_mastery'] = new Chart(document.getElementById('lc_mastery'), {
+    type: 'line',
+    data: { labels, datasets: strats.map(s => ({ label: STRAT_LABELS[s]||s, data: mc[s], borderColor: STRAT_COLORS[s], backgroundColor: STRAT_COLORS[s] + '15', borderWidth: 2, tension: 0.4, pointRadius: 0, fill: true })) },
+    options: chartOpts({ scales: { y: { min: 0, max: 1, title: { display: true, text: 'Mastery %', color: '#64748b' } } } })
+  });
+
+  const raMaxLen = Math.max(...strats.map(s => ra[s]?.length || 0));
+  const raLabels = Array.from({length: raMaxLen}, (_,i) => i * 10);
+  destroyChart('lc_balance');
+  charts['lc_balance'] = new Chart(document.getElementById('lc_balance'), {
+    type: 'line',
+    data: { labels: raLabels, datasets: strats.map(s => ({ label: STRAT_LABELS[s]||s, data: ra[s], borderColor: STRAT_COLORS[s], backgroundColor: 'transparent', borderWidth: 1.5, tension: 0.3, pointRadius: 0 })) },
+    options: chartOpts({ scales: { y: { min: 0, max: 1, title: { display: true, text: 'Accuracy', color: '#64748b' } } } })
+  });
+}
+
+function renderStrategies(data) {
+  const m = data.metrics;
+  const sm = m.strategy_metrics;
+  const sens = m.sensitivity;
+  const rt = m.review_timing;
+
+  const strats = Object.keys(sm);
+
+  document.getElementById('strategyContent').innerHTML = `
+  <div class="fade-in">
+    <div class="grid-2" style="margin-bottom:16px">
+      <div class="chart-card">
+        <div class="chart-title"><span class="ct-dot" style="background:var(--c2)"></span>Skill Coverage per Strategy</div>
+        <div class="chart-wrap"><canvas id="str_cov"></canvas></div>
+      </div>
+      <div class="chart-card">
+        <div class="chart-title"><span class="ct-dot" style="background:var(--c4)"></span>BKT Parameter Sensitivity (p_init vs Gain)</div>
+        <div class="chart-wrap"><canvas id="str_sens"></canvas></div>
+      </div>
+    </div>
+    <div class="grid-2">
+      <div class="chart-card">
+        <div class="chart-title"><span class="ct-dot" style="background:var(--c1)"></span>Review Timing per Strategy</div>
+        <div class="chart-wrap" style="height:240px"><canvas id="str_timing"></canvas></div>
+      </div>
+      <div class="chart-card">
+        <div class="chart-title"><span class="ct-dot" style="background:var(--c3)"></span>Multi-Metric Radar</div>
+        <div class="chart-wrap" style="height:240px"><canvas id="str_radar"></canvas></div>
+      </div>
+    </div>
+  </div>`;
+
+  // Coverage horizontal bar
+  destroyChart('str_cov');
+  charts['str_cov'] = new Chart(document.getElementById('str_cov'), {
+    type: 'bar',
+    data: { labels: strats.map(s=>STRAT_LABELS[s]||s), datasets: [{ label: 'Coverage', data: strats.map(s=>(sm[s]?.skill_coverage||0)*100), backgroundColor: strats.map(s=>STRAT_COLORS[s]+'bb'), borderColor: strats.map(s=>STRAT_COLORS[s]), borderWidth: 2, borderRadius: 6 }] },
+    options: chartOpts({ indexAxis: 'y', scales: { x: { min:0, max:100, title: { display:true, text:'%', color:'#64748b' } } }, plugins: { legend: { display: false } } })
+  });
+
+  // Sensitivity
+  destroyChart('str_sens');
+  charts['str_sens'] = new Chart(document.getElementById('str_sens'), {
+    type: 'line',
+    data: { labels: sens.p_init_values, datasets: [{ label: 'Learning Gain', data: sens.learning_gains, borderColor: '#f59e0b', backgroundColor: '#f59e0b22', borderWidth: 2.5, tension: 0.4, fill: true, pointRadius: 5, pointBackgroundColor: '#f59e0b' }] },
+    options: chartOpts({ scales: { x: { title: { display:true, text:'p_init', color:'#64748b' } }, y: { title: { display:true, text:'Gain', color:'#64748b' } } } })
+  });
+
+  // Timing stacked bar
+  destroyChart('str_timing');
+  charts['str_timing'] = new Chart(document.getElementById('str_timing'), {
+    type: 'bar',
+    data: {
+      labels: strats.map(s=>STRAT_LABELS[s]||s),
+      datasets: [
+        { label: 'Optimal', data: strats.map(s=>(rt[s]?.optimal||0)*100), backgroundColor: '#10b981bb', borderColor: '#10b981', borderWidth: 1 },
+        { label: 'Early', data: strats.map(s=>(rt[s]?.early||0)*100), backgroundColor: '#f59e0bbb', borderColor: '#f59e0b', borderWidth: 1 },
+        { label: 'Late', data: strats.map(s=>(rt[s]?.late||0)*100), backgroundColor: '#ef4444bb', borderColor: '#ef4444', borderWidth: 1 }
+      ]
+    },
+    options: chartOpts({ scales: { x: { stacked: true }, y: { stacked: true, max: 100, title: { display:true, text:'%', color:'#64748b' } } } })
+  });
+
+  // Radar
+  destroyChart('str_radar');
+  const radarMetrics = ['avg_learning_gain','skill_coverage','optimal_review_pct','avg_mastery_count'];
+  const radarLabels = ['Learning Gain','Skill Coverage','Optimal Review','Mastery Count'];
+  // Normalize mastery count
+  const maxMastery = Math.max(...strats.map(s=>sm[s]?.avg_mastery_count||0)) || 1;
+  charts['str_radar'] = new Chart(document.getElementById('str_radar'), {
+    type: 'radar',
+    data: {
+      labels: radarLabels,
+      datasets: strats.map(s => ({
+        label: STRAT_LABELS[s]||s,
+        data: [
+          sm[s]?.avg_learning_gain||0,
+          sm[s]?.skill_coverage||0,
+          sm[s]?.optimal_review_pct||0,
+          (sm[s]?.avg_mastery_count||0)/maxMastery
+        ],
+        borderColor: STRAT_COLORS[s], backgroundColor: STRAT_COLORS[s]+'33', borderWidth: 2, pointRadius: 3
+      }))
+    },
+    options: {
+      ...chartOpts({}),
+      scales: { r: { suggestedMin: 0, suggestedMax: 1, grid: { color: '#1e2d4a' }, pointLabels: { color: '#94a3b8', font: { size: 11 } }, ticks: { display: false } } }
+    }
+  });
+}
+
+function renderHeatmap(data) {
+  const m = data.metrics;
+  const hm = m.skill_heatmap;
+  const strats = Object.keys(hm);
+  if (!strats.length) { document.getElementById('heatmapContent').innerHTML = '<div class="no-data">No heatmap data</div>'; return; }
+
+  const allSkills = [...new Set(strats.flatMap(s => Object.keys(hm[s])))];
+
+  let html = `<div class="fade-in"><div class="chart-card">
+    <div class="chart-title">Skill Knowledge Heatmap — Final P(know) per Strategy</div>
+    <div style="overflow-x:auto;margin-top:8px">`;
+
+  // Strategy headers
+  html += `<div style="display:grid;grid-template-columns:160px ${strats.map(()=>'1fr').join(' ')};gap:3px;margin-bottom:6px">
+    <div></div>
+    ${strats.map(s=>`<div style="text-align:center;font-size:11px;font-family:'Space Mono';color:${STRAT_COLORS[s]};padding:4px">${STRAT_LABELS[s]||s}</div>`).join('')}
+  </div>`;
+
+  allSkills.forEach(skill => {
+    html += `<div style="display:grid;grid-template-columns:160px ${strats.map(()=>'1fr').join(' ')};gap:3px;margin-bottom:3px">
+      <div style="font-size:11px;color:var(--text2);display:flex;align-items:center;padding-right:8px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${skill}</div>
+      ${strats.map(s => {
+        const v = hm[s]?.[skill] || 0;
+        const pct = Math.round(v * 100);
+        const bg = heatColor(v);
+        return `<div class="heatmap-cell" style="background:${bg};color:${v>0.5?'#000':'#e2e8f0'}">${pct}%</div>`;
+      }).join('')}
+    </div>`;
+  });
+
+  html += `</div>
+    <div style="margin-top:16px;display:flex;align-items:center;gap:8px;font-size:11px;color:var(--text3)">
+      <span>Low</span>
+      <div style="width:200px;height:10px;border-radius:5px;background:linear-gradient(90deg,#1e3a5f,#0ea5e9,#10b981,#84cc16)"></div>
+      <span>High (Mastered)</span>
+    </div>
+  </div></div>`;
+
+  document.getElementById('heatmapContent').innerHTML = html;
+}
+
+function heatColor(v) {
+  if (v < 0.2) return `rgba(30,58,95,0.9)`;
+  if (v < 0.4) return `rgba(14,100,180,0.85)`;
+  if (v < 0.6) return `rgba(14,165,233,0.85)`;
+  if (v < 0.8) return `rgba(16,185,129,0.85)`;
+  return `rgba(132,204,22,0.9)`;
+}
+
+function renderReport(data) {
+  const r = data.report;
+  const m = data.metrics;
+
+  let html = `<div class="fade-in">`;
+
+  // Values
+  html += `<div class="report-section"><h3>📊 Values</h3>`;
+  for (const [k,v] of Object.entries(r.values)) {
+    html += `<div class="placeholder-box"><span>[VALUE: ${k}]</span><span class="pval">${v}</span></div>`;
+  }
+  html += `</div>`;
+
+  // Tables
+  html += `<div class="report-section"><h3>📋 Tables</h3>`;
+
+  html += `<div style="margin-bottom:12px"><div style="font-size:11px;color:var(--text3);margin-bottom:6px;font-family:'Space Mono'">[TABLE: Strategy Comparison]</div>`;
+  html += `<table class="data-table"><thead><tr>${Object.keys(r.tables.strategy_comparison[0]||{}).map(k=>`<th>${k}</th>`).join('')}</tr></thead><tbody>`;
+  r.tables.strategy_comparison.forEach((row,i) => {
+    html += `<tr class="${i===0?'rank-1':i===1?'rank-2':''}">${Object.values(row).map(v=>`<td>${v}</td>`).join('')}</tr>`;
+  });
+  html += `</tbody></table></div>`;
+
+  html += `<div style="margin-bottom:12px"><div style="font-size:11px;color:var(--text3);margin-bottom:6px;font-family:'Space Mono'">[TABLE: Dataset Statistics]</div>`;
+  html += `<table class="data-table"><thead><tr><th>Field</th><th>Value</th></tr></thead><tbody>`;
+  r.tables.dataset_statistics.forEach(row => { html += `<tr><td>${row.Field}</td><td><span class="chip chip-blue">${row.Value}</span></td></tr>`; });
+  html += `</tbody></table></div>`;
+
+  html += `<div><div style="font-size:11px;color:var(--text3);margin-bottom:6px;font-family:'Space Mono'">[TABLE: Parameter Configuration]</div>`;
+  html += `<table class="data-table"><thead><tr><th>Parameter</th><th>Value</th><th>Description</th></tr></thead><tbody>`;
+  r.tables.parameter_configuration.forEach(row => { html += `<tr><td style="font-family:'Space Mono'">${row.Parameter}</td><td><span class="chip chip-purple">${row.Value}</span></td><td>${row.Description}</td></tr>`; });
+  html += `</tbody></table></div></div>`;
+
+  // Graphs available
+  html += `<div class="report-section"><h3>📈 Graphs Available</h3>`;
+  r.graphs_available.forEach(g => {
+    html += `<div class="placeholder-box"><span>[GRAPH: ${g}]</span><span class="chip chip-green">✓ Generated</span></div>`;
+  });
+  html += `</div>`;
+
+  // Text
+  html += `<div class="report-section"><h3>📝 Text Outputs</h3>`;
+  for (const [k,v] of Object.entries(r.text)) {
+    const label = k.replace(/_/g,' ').replace(/\b\w/g,c=>c.toUpperCase());
+    html += `<div style="margin-bottom:12px"><div style="font-size:11px;color:var(--text3);margin-bottom:6px;font-family:'Space Mono'">[TEXT: ${label}]</div><div class="text-block">${v}</div></div>`;
+  }
+  html += `</div>`;
+
+  html += `</div>`;
+  document.getElementById('reportContent').innerHTML = html;
+}
+
+// ─── UTILS ───
+function switchTab(name) {
+  document.querySelectorAll('.tab').forEach((t,i) => t.classList.toggle('active', ['overview','learning','strategies','heatmap','report'][i] === name));
+  document.querySelectorAll('.tab-content').forEach(c => c.classList.toggle('active', c.id === 'tab-' + name));
+}
+
+function setStatus(msg, state) {
+  document.getElementById('statusBar').textContent = msg;
+  const dot = document.getElementById('statusDot');
+  dot.className = 'dot' + (state==='running' ? ' running' : state==='error' ? ' error' : '');
+}
+
+function destroyChart(id) {
+  if (charts[id]) { charts[id].destroy(); delete charts[id]; }
+}
+
+function chartOpts(extra) {
+  const base = {
+    responsive: true, maintainAspectRatio: false, animation: { duration: 600 },
+    plugins: {
+      legend: { labels: { color: '#94a3b8', font: { size: 11, family: "'DM Sans'" }, boxWidth: 10 } },
+      tooltip: { backgroundColor: '#1e293b', titleColor: '#e2e8f0', bodyColor: '#94a3b8', borderColor: '#1e2d4a', borderWidth: 1 }
+    },
+    scales: {
+      x: { grid: { color: '#1e2d4a' }, ticks: { color: '#64748b', font: { size: 11 } } },
+      y: { grid: { color: '#1e2d4a' }, ticks: { color: '#64748b', font: { size: 11 } } }
+    }
+  };
+  return deepMerge(base, extra);
+}
+
+function deepMerge(base, override) {
+  const result = { ...base };
+  for (const k in override) {
+    if (override[k] && typeof override[k] === 'object' && !Array.isArray(override[k])) {
+      result[k] = deepMerge(base[k] || {}, override[k]);
+    } else {
+      result[k] = override[k];
+    }
+  }
+  return result;
+}
+
+// ─── BOOT ───
+init();
+</script>
+</body>
+</html>
